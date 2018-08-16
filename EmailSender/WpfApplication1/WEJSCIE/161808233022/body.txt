@@ -1,0 +1,23 @@
+Special class
+public class MyItem
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+}
+
+XAML
+<ListView x:Name="listView">
+    <ListView.View>
+        <GridView>
+            <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
+            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+        </GridView>
+    </ListView.View>
+</ListView>
+
+Code
+public Window1()
+{
+    this.InitializeComponent();
+    this.listView.Items.Add(new MyItem { Id = 1, Name = "Davidwroxy" });
+}

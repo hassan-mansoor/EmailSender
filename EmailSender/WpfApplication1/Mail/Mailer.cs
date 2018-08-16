@@ -6,39 +6,36 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
+using EmailComposer.Writter;
 
-namespace EmailSender.Mail
+namespace EmailComposer.Mail
 {
     class Mailer
     {
-        public void CreateMaile(List<string> attachment_lst)
+        public string CreateMaile(MessageModel Mail)
         {
+            string toaster_message = string.Empty;
             try {
                   MailMessage message = new MailMessage();
-                  message.To.Add(new MailAddress("hassan_mansoor32@yahoo.com"));
-                  message.From = new MailAddress("put.hassanmansoor@gmail.com");
-                  message.Subject = "Sample subject";
-                  message.Body = CreateMailBody("Example body this is sample message");
+                  message.From = new MailAddress(Mail.From);
+                  AddRecipients(Mail.To, message);
+                  message.Subject = Mail.Subject;
+                  message.Body = CreateMailBody(Mail.Body);
                   message.IsBodyHtml = true;
-             //     AddAttachments(message, attachment_lst);
-                  Console.WriteLine(message);
-                  SmtpClient smtp = new SmtpClient();
-                  smtp.Host = ConfigurationManager.AppSettings["Host"];
-                  smtp.EnableSsl = Convert.ToBoolean(ConfigurationManager.AppSettings["EnableSsl"]);
-                  //System.Net.NetworkCredential NetworkCred = new System.Net.NetworkCredential();
-                  //NetworkCred.UserName = ConfigurationManager.AppSettings["UserName"];
-                  //NetworkCred.Password = ConfigurationManager.AppSettings["Password"];
-                  smtp.UseDefaultCredentials = true;
-                  smtp.Timeout = 10000;
-                  smtp.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["UserName"], ConfigurationManager.AppSettings["Password"]);
-                  smtp.Port = int.Parse(ConfigurationManager.AppSettings["Port"]); //reading from web.config  
-                  smtp.Send(message);
-                
+                  AddAttachments(message, Mail.Attachments);
+                  bool AreFilesCreated = SaveToFile(Mail);
+                if (AreFilesCreated)
+                {
+                    toaster_message = "\nEmail Files Composed Successfully\n";
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Exception in sendEmail:" + ex.Message);
+                toaster_message =  $"\n{ex.Message}\n";
             }
+
+            return toaster_message;
         }
 
         private string CreateMailBody( string message)
@@ -52,11 +49,34 @@ namespace EmailSender.Mail
 
         private void AddAttachments(MailMessage message, List<string> attachment_lst)
         {
-            attachment_lst.ForEach(attachment => {
-                Attachment a = new Attachment(attachment);
-                message.Attachments.Add(a);
-            });
+            if (attachment_lst.Count > 0)
+            {
+                attachment_lst.ForEach(attachment =>
+                {
+                    Attachment a = new Attachment(attachment);
+                    message.Attachments.Add(a);
+                });
+            }
+        }
 
+        private void AddRecipients(List<string> recipients, MailMessage message)
+        {
+            recipients.ForEach(to => message.To.Add(
+                new MailAddress(to)
+                ));
+        }
+
+        private bool SaveToFile(MessageModel message)
+        {
+            WriteToFile writter = new WriteToFile();
+            writter.CreateSubDirectoryWithTimeStamp();
+            writter.FileWritter("subject", message.Subject);
+            writter.FileWritter("body", message.Body);
+            writter.FileWritter("MailAddressFrom", message.From);
+            writter.FileWritter("MailAddressesTo", message.To.ToList());
+            writter.FileWritter("Attachments", message.Attachments.ToList());
+
+            return true;
         }
     }
 }

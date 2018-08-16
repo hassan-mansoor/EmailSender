@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Blend for Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailSender", "WpfApplication1\EmailSender.csproj", "{71A243BF-EA15-49FF-8537-182A5A818023}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailComposer", "WpfApplication1\EmailComposer.csproj", "{71A243BF-EA15-49FF-8537-182A5A818023}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
