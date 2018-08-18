@@ -1,0 +1,27 @@
+c:\users\mansha\documents\visual studio 2015\Projects\SPECFILE_M\SPECFILE_M\bin\Debug\SPECFILE_M.exe.config
+c:\users\mansha\documents\visual studio 2015\Projects\SPECFILE_M\SPECFILE_M\bin\Debug\SPECFILE_M.exe
+c:\users\mansha\documents\visual studio 2015\Projects\SPECFILE_M\SPECFILE_M\bin\Debug\SPECFILE_M.pdb
+c:\users\mansha\documents\visual studio 2015\Projects\SPECFILE_M\SPECFILE_M\obj\Debug\SPECFILE_M.csprojResolveAssemblyReference.cache
+c:\users\mansha\documents\visual studio 2015\Projects\SPECFILE_M\SPECFILE_M\obj\Debug\MainWindow.g.cs
+c:\users\mansha\documents\visual studio 2015\Projects\SPECFILE_M\SPECFILE_M\obj\Debug\App.g.cs
+c:\users\mansha\documents\visual studio 2015\Projects\SPECFILE_M\SPECFILE_M\obj\Debug\SPECFILE_M_MarkupCompile.cache
+c:\users\mansha\documents\visual studio 2015\Projects\SPECFILE_M\SPECFILE_M\obj\Debug\SPECFILE_M_MarkupCompile.lref
+c:\users\mansha\documents\visual studio 2015\Projects\SPECFILE_M\SPECFILE_M\obj\Debug\MainWindow.baml
+c:\users\mansha\documents\visual studio 2015\Projects\SPECFILE_M\SPECFILE_M\obj\Debug\SPECFILE_M.g.resources
+c:\users\mansha\documents\visual studio 2015\Projects\SPECFILE_M\SPECFILE_M\obj\Debug\SPECFILE_M.Properties.Resources.resources
+c:\users\mansha\documents\visual studio 2015\Projects\SPECFILE_M\SPECFILE_M\obj\Debug\SPECFILE_M.csproj.GenerateResource.Cache
+c:\users\mansha\documents\visual studio 2015\Projects\SPECFILE_M\SPECFILE_M\obj\Debug\SPECFILE_M.exe
+c:\users\mansha\documents\visual studio 2015\Projects\SPECFILE_M\SPECFILE_M\obj\Debug\SPECFILE_M.pdb
+C:\Users\mansha\Documents\Email-sender\SPECFILE_M\SPECFILE_M\bin\Debug\SPECFILE_M.exe.config
+C:\Users\mansha\Documents\Email-sender\SPECFILE_M\SPECFILE_M\bin\Debug\SPECFILE_M.exe
+C:\Users\mansha\Documents\Email-sender\SPECFILE_M\SPECFILE_M\bin\Debug\SPECFILE_M.pdb
+C:\Users\mansha\Documents\Email-sender\SPECFILE_M\SPECFILE_M\obj\Debug\MainWindow.g.cs
+C:\Users\mansha\Documents\Email-sender\SPECFILE_M\SPECFILE_M\obj\Debug\App.g.cs
+C:\Users\mansha\Documents\Email-sender\SPECFILE_M\SPECFILE_M\obj\Debug\SPECFILE_M_MarkupCompile.cache
+C:\Users\mansha\Documents\Email-sender\SPECFILE_M\SPECFILE_M\obj\Debug\SPECFILE_M_MarkupCompile.lref
+C:\Users\mansha\Documents\Email-sender\SPECFILE_M\SPECFILE_M\obj\Debug\MainWindow.baml
+C:\Users\mansha\Documents\Email-sender\SPECFILE_M\SPECFILE_M\obj\Debug\SPECFILE_M.g.resources
+C:\Users\mansha\Documents\Email-sender\SPECFILE_M\SPECFILE_M\obj\Debug\SPECFILE_M.Properties.Resources.resources
+C:\Users\mansha\Documents\Email-sender\SPECFILE_M\SPECFILE_M\obj\Debug\SPECFILE_M.csproj.GenerateResource.Cache
+C:\Users\mansha\Documents\Email-sender\SPECFILE_M\SPECFILE_M\obj\Debug\SPECFILE_M.exe
+C:\Users\mansha\Documents\Email-sender\SPECFILE_M\SPECFILE_M\obj\Debug\SPECFILE_M.pdb
