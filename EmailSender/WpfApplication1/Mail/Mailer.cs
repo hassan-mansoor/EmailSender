@@ -32,7 +32,7 @@ namespace EmailComposer.Mail
             catch (Exception ex)
             {
                 Console.WriteLine("Exception in sendEmail:" + ex.Message);
-                toaster_message =  $"\n{ex.Message}\n";
+                toaster_message =  "\n"+ ex.Message +"\n";
             }
 
             return toaster_message;
