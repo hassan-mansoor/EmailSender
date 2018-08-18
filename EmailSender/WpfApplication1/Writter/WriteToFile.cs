@@ -15,12 +15,12 @@ namespace EmailComposer.Writter
         public WriteToFile()
         {
             dt = DateTime.Now;
-            directory_name = "../../WEJSCIE";
-            subdirectory_name = $"{directory_name}/{dt.ToString("ddyyMMHHmmss")}";
+            directory_name = "../../../../WEJSCIE";
+            subdirectory_name = directory_name+"/"+dt.ToString("ddyyMMHHmmss");
         }
         public void CreateDirectory()
         {
-            bool directoryExists = Directory.Exists("../../WEJSCIE");
+            bool directoryExists = Directory.Exists("../../../../WEJSCIE");
             if (!directoryExists)
             {
                 Directory.CreateDirectory(directory_name);
@@ -45,7 +45,7 @@ namespace EmailComposer.Writter
             {
                 if (data != string.Empty)
                 {
-                    System.IO.File.WriteAllText($"{subdirectory_name}/{file_name}.txt", data);
+                    System.IO.File.WriteAllText(subdirectory_name+"/"+ file_name+".txt", data);
                 }
             }
             catch (Exception e)
@@ -61,7 +61,7 @@ namespace EmailComposer.Writter
             {
                 if (data_list.Count > 0)
                 {
-                    System.IO.File.WriteAllLines($"{subdirectory_name}/{file_name}.txt", data_list.ToList());
+                    System.IO.File.WriteAllLines(subdirectory_name+"/"+file_name+".txt", data_list.ToList());
                 }                
             }
             catch (Exception e)
