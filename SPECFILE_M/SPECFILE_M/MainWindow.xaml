@@ -5,8 +5,81 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SPECFILE_M"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="700" Width="950">
     <Grid>
-        
+        <Grid.RowDefinitions >
+            <RowDefinition Height="Auto" ></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="2" Grid.Column="0"
+               VerticalContentAlignment="Top"
+               VerticalAlignment="Top"
+               HorizontalAlignment="Left"
+               HorizontalContentAlignment="Left"
+               Margin="10,18,-20,0"
+               Name="lblAttachments" Width="80">Attachments:</Label>
+        <TextBox Grid.Row="2" Grid.Column="1"
+                 VerticalAlignment="Top"
+                 VerticalContentAlignment="Center"
+                 HorizontalAlignment="Left"
+                 HorizontalContentAlignment="Left"
+                 Margin="20,18,0,0"
+                 Name="txtAttachment"
+                 Width="682"
+                 Height="30"
+                 Text="{Binding txtAttachment, Mode=OneWay}">
+        </TextBox>
+        <Button Grid.Row="2" Grid.Column="1"
+                Name="uploadBtn"
+                Content="Upload File"
+                HorizontalAlignment="Left"
+                Margin="730,18,0,-2"
+                Width="110"
+                Click="Upload" RenderTransformOrigin="0.267,6.615"/>
+        <ListView x:Name="listView" Grid.Row="4" Width="605" Margin="20,18,0,-42" Height="100" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" Grid.RowSpan="6">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Files Attached" DisplayMemberBinding="{Binding fileName, Mode=OneWay}" Width="500"/>
+                    <GridViewColumn Header="Files Size" DisplayMemberBinding="{Binding fileSize, Mode=OneWay}" Width="Auto"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Grid.Row="3" Grid.Column="1"
+               VerticalContentAlignment="Top"
+               VerticalAlignment="Top"
+               HorizontalAlignment="Left"
+               HorizontalContentAlignment="Left"
+               Margin="20,18,0,0"
+               Name="lblToster" Width="682"></Label>
+
+        <Button Grid.Row="9" Grid.Column="1"
+            Content="Start"
+                HorizontalAlignment="Left"
+                Margin="515,0,0,-97.633"
+                Width="110"
+                Click="Start" RenderTransformOrigin="0.267,6.615" Height="26.633" VerticalAlignment="Bottom"/>
+        <TextBox Grid.Row="9" Grid.Column="1"
+                 VerticalAlignment="Top"
+                 VerticalContentAlignment="Top"
+                 HorizontalAlignment="Left"
+                 HorizontalContentAlignment="Left"
+                 Margin="20,165,0,-447.444"
+                 Name="logger"
+                 Width="682"
+                 Height="339"
+                 Text="{Binding logger, Mode=OneWay}">
+        </TextBox>
     </Grid>
 </Window>

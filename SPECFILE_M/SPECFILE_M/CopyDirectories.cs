@@ -9,13 +9,17 @@ namespace SPECFILE_M
 {
     class CopyDirectories
     {
-       
-        public CopyDirectories()
+        string sourceFolder = @"..\..\..\..\WEJSCIE\";
+        string destFolder = @"..\..\..\..\BUFOR\";
+        public List<string> MessageLogger = new List<string>();
+
+        public void Init()
         {
-            string sourceFolder = @"..\..\..\..\WEJSCIE\";
-            string destFolder = @"..\..\..\..\BUFOR\";
+            MessageLogger.Add("Start ....");
+            MessageLogger.Add("Createing  Directory: "+ destFolder.Split('\\').Last());
             if (IsDirectoryExist(sourceFolder))
             {
+                MessageLogger.Add("StartCopying Folder and files ....");
                 CopyFolder(sourceFolder, destFolder);
             }
         }
@@ -55,6 +59,7 @@ namespace SPECFILE_M
                 string name = Path.GetFileName(folder);
                 string dest = Path.Combine(destFolder, name);
                 CopyFolder(folder, dest);
+                MessageLogger.Add("Copping directory: "+ folder.Split('\\').Last());
                 RemoveDirectory(folder);
             }
         }
@@ -69,5 +74,14 @@ namespace SPECFILE_M
             Directory.Delete(direcoty);
         }
 
+        public bool CheckWEJSCIEISEmpty()
+        {
+            return IsDirectoryExist(sourceFolder) && Directory.GetDirectories(sourceFolder).Length != 0;
+        }
+
+        public void RemoveDirectoryRecursively(string directory)
+        {
+            Directory.Delete(directory, true);
+        }
     }
 }

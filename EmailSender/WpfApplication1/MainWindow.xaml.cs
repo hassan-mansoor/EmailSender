@@ -78,7 +78,7 @@ namespace EmailComposer
                 if (fileSize <= 25)
                 {
                     attachment_lst.Add(filename);
-                    this.listView.Items.Add(new AttachFiles() { fileName = filename, fileSize = $"{fileSize.ToString()} MB" });
+                    this.listView.Items.Add(new AttachFiles() { fileName = filename, fileSize = fileSize.ToString() + " MB" });
                 } else
                 {
                     lblToster.Content += "\nMaximum file size is 25 MB.\n";

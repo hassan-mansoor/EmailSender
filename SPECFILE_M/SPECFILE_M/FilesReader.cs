@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,18 +12,36 @@ namespace SPECFILE_M
 {
     class FilesReader
     {
+        private List<string> _AttachmentList;
+        private SmtpSettings smtpItem;
+        public List<string> MessageLogger = new List<string>();
+
+        public FilesReader()
+        {
+            MessageLogger.Add("Reading Configuration File for SMTP settings");
+            try {
+                StreamReader JsonReader = new StreamReader(@"..\..\..\..\config.json");
+                string json = JsonReader.ReadToEnd();
+                smtpItem = JsonConvert.DeserializeObject<SmtpSettings>(json);
+                MessageLogger.Add("Successfully Finish reading configuration file for SMTP settings");
+            } catch (Exception e)
+            {
+                MessageLogger.Add("Error Reading Configuration File for SMTP settings" +  e.Message.ToString());
+            }
+        }
+
         public void ReadDirectories()
         {
-            string sourceFolder = @"C:\Users\mansha\Documents\TestCopy\";
-
+            string sourceFolder = @"..\..\..\..\BUFOR\";
             string[] folders = Directory.GetDirectories(sourceFolder);
             foreach (string folder in folders)
             {
-                string recipients = $"{folder}\\MailAddressesTo.txt";
-                string attachments = $"{folder}\\Attachments.txt";
-                string body = File.ReadAllText($"{folder}\\body.txt");
+                MessageLogger.Add("Start Reading email files form directory: "+ folder.Split('\\').Last());
+                string recipients = folder+"\\MailAddressesTo.txt";
+                string attachments = folder+"\\Attachments.txt";
+                string body = File.ReadAllText(folder+"\\body.txt");
                 MailMessage message = new MailMessage();
-                message.From = new MailAddress("put.hassanmansoor@gmail.com");
+                message.From = new MailAddress(smtpItem.email);
                 ReadFileToAddRecipients(recipients, message);
                 message.Subject = "Korespondencja niejawna";
                 message.Body = body;
@@ -30,13 +49,19 @@ namespace SPECFILE_M
                 message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess;
                 message.Priority = MailPriority.High;
                 ReadFileToAddAttachments(attachments,message);
+                AddExternalAttachments(message);
                 try
                 {
+                    MessageLogger.Add("Sending Email to recipients");
                     send(message);
+                    MessageLogger.Add("Sending Email Successful");
+                    CopyDirectories copyDirectory = new CopyDirectories();
+                    copyDirectory.RemoveDirectoryRecursively(folder);
+                    MessageLogger.Add("Removing all files and directory: " + folder.Split('\\').Last());
                 }
                 catch (SmtpFailedRecipientException ex)
                 {
-                    Console.WriteLine(ex);
+                    MessageLogger.Add("Error in Sending email"+ ex.Message.ToString());
                 }
 
             }
@@ -61,14 +86,38 @@ namespace SPECFILE_M
             }
         }
 
-        public void send(MailMessage message)
+        public void AddExternalAttachments(MailMessage message)
         {
+            if (_AttachmentList.Count > 0)
+            {
+                _AttachmentList.ForEach(attachment =>
+                {
+                    Attachment a = new Attachment(attachment);
+                    message.Attachments.Add(a);
+                });
+            }
+        }
+
+        public void send(MailMessage message)
+        {            
             SmtpClient smtp = new SmtpClient();
-            smtp.Host = "smtp.gmail.com";
-            smtp.EnableSsl = true;
-            smtp.Credentials = new NetworkCredential("put.hassanmansoor@gmail.com", "Hobnob101");
-            smtp.Port = 587; //reading from web.config  
-            smtp.Send(message);
+            smtp.Host = smtpItem.server;
+            smtp.EnableSsl = Convert.ToBoolean(smtpItem.Enable_ssl);
+            smtp.Credentials = new NetworkCredential(smtpItem.email, smtpItem.password);
+            smtp.Port = Convert.ToInt32(smtpItem.port); //reading from config.json  
+            smtp.Send(message);            
+        }
+
+        public List<string> AttachmentList
+        {
+            get
+            {
+                return this._AttachmentList;
+            }
+            set
+            {
+                this._AttachmentList = value;
+            }
         }
     }
 }
