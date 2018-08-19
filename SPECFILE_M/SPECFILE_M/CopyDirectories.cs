@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,8 @@ namespace SPECFILE_M
 {
     class CopyDirectories
     {
-        string sourceFolder = @"..\..\..\..\WEJSCIE\";
-        string destFolder = @"..\..\..\..\BUFOR\";
+        string sourceFolder = ConfigurationManager.AppSettings["WEJSCIEDirectory"];
+        string destFolder = ConfigurationManager.AppSettings["BUFORDirectory"];
         public List<string> MessageLogger = new List<string>();
 
         public void Init()

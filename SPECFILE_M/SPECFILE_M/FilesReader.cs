@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -13,26 +14,11 @@ namespace SPECFILE_M
     class FilesReader
     {
         private List<string> _AttachmentList;
-        private SmtpSettings smtpItem;
-        public List<string> MessageLogger = new List<string>();
-
-        public FilesReader()
-        {
-            MessageLogger.Add("Reading Configuration File for SMTP settings");
-            try {
-                StreamReader JsonReader = new StreamReader(@"..\..\..\..\config.json");
-                string json = JsonReader.ReadToEnd();
-                smtpItem = JsonConvert.DeserializeObject<SmtpSettings>(json);
-                MessageLogger.Add("Successfully Finish reading configuration file for SMTP settings");
-            } catch (Exception e)
-            {
-                MessageLogger.Add("Error Reading Configuration File for SMTP settings" +  e.Message.ToString());
-            }
-        }
+        public List<string> MessageLogger = new List<string>();       
 
         public void ReadDirectories()
         {
-            string sourceFolder = @"..\..\..\..\BUFOR\";
+            string sourceFolder = ConfigurationManager.AppSettings["BUFORDirectory"];
             string[] folders = Directory.GetDirectories(sourceFolder);
             foreach (string folder in folders)
             {
@@ -41,10 +27,10 @@ namespace SPECFILE_M
                 string attachments = folder+"\\Attachments.txt";
                 string body = File.ReadAllText(folder+"\\body.txt");
                 MailMessage message = new MailMessage();
-                message.From = new MailAddress(smtpItem.email);
+                message.From = new MailAddress(ConfigurationManager.AppSettings["UserName"]);
                 ReadFileToAddRecipients(recipients, message);
                 message.Subject = "Korespondencja niejawna";
-                message.Body = body;
+                message.Body = CreateMessageBody(body);
                 message.IsBodyHtml = true;
                 message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess;
                 message.Priority = MailPriority.High;
@@ -86,6 +72,15 @@ namespace SPECFILE_M
             }
         }
 
+        private string CreateMessageBody(string message)
+        {
+            string body = string.Empty;
+            StreamReader reader = new StreamReader("../../Templates/Template1.html");
+            body = reader.ReadToEnd();
+            body = body.Replace("{message}", message);
+            return body;
+        }
+
         public void AddExternalAttachments(MailMessage message)
         {
             if (_AttachmentList.Count > 0)
@@ -101,10 +96,10 @@ namespace SPECFILE_M
         public void send(MailMessage message)
         {            
             SmtpClient smtp = new SmtpClient();
-            smtp.Host = smtpItem.server;
-            smtp.EnableSsl = Convert.ToBoolean(smtpItem.Enable_ssl);
-            smtp.Credentials = new NetworkCredential(smtpItem.email, smtpItem.password);
-            smtp.Port = Convert.ToInt32(smtpItem.port); //reading from config.json  
+            smtp.Host = ConfigurationManager.AppSettings["Host"];
+            smtp.EnableSsl = Convert.ToBoolean(ConfigurationManager.AppSettings["EnableSsl"]);
+            smtp.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["UserName"], ConfigurationManager.AppSettings["Password"]);
+            smtp.Port = Convert.ToInt32(ConfigurationManager.AppSettings["Port"]); //reading from config.json  
             smtp.Send(message);            
         }
 

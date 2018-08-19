@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Configuration;
+
 namespace EmailComposer.Writter
 {
     class WriteToFile
@@ -15,12 +17,12 @@ namespace EmailComposer.Writter
         public WriteToFile()
         {
             dt = DateTime.Now;
-            directory_name = "../../../../WEJSCIE";
+            directory_name = ConfigurationManager.AppSettings["WEJSCIEDirectory"]; ;
             subdirectory_name = directory_name+"/"+dt.ToString("ddyyMMHHmmss");
         }
         public void CreateDirectory()
         {
-            bool directoryExists = Directory.Exists("../../../../WEJSCIE");
+            bool directoryExists = Directory.Exists(ConfigurationManager.AppSettings["WEJSCIEDirectory"]);
             if (!directoryExists)
             {
                 Directory.CreateDirectory(directory_name);

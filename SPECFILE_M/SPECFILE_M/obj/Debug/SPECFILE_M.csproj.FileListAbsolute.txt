@@ -40,3 +40,4 @@ C:\Users\mansha\Documents\EmailSender\SPECFILE_M\SPECFILE_M\obj\Debug\SPECFILE_M
 C:\Users\mansha\Documents\EmailSender\SPECFILE_M\SPECFILE_M\obj\Debug\SPECFILE_M.Properties.Resources.resources
 C:\Users\mansha\Documents\EmailSender\SPECFILE_M\SPECFILE_M\obj\Debug\SPECFILE_M.csproj.GenerateResource.Cache
 C:\Users\mansha\Documents\EmailSender\SPECFILE_M\SPECFILE_M\bin\Debug\Newtonsoft.Json.dll
+C:\Users\mansha\Documents\EmailSender\SPECFILE_M\SPECFILE_M\obj\Debug\SPECFILE_M_Content.g.cs

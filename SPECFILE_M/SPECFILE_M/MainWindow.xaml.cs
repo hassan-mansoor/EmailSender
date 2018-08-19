@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -54,7 +55,7 @@ namespace SPECFILE_M
                 logger.Text += msg.ToString()+ "\n"; 
             });
 
-            aTimer = new System.Timers.Timer(60000);
+            aTimer = new System.Timers.Timer(Convert.ToInt32(ConfigurationManager.AppSettings["IntervalInMilliSeconds"]));
             aTimer.Elapsed += new ElapsedEventHandler((source, args) => {
                 CopyDirectories copy1 = new CopyDirectories();
                 if (copy1.CheckWEJSCIEISEmpty())

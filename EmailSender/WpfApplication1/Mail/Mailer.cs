@@ -23,6 +23,7 @@ namespace EmailComposer.Mail
                   message.Body = CreateMailBody(Mail.Body);
                   message.IsBodyHtml = true;
                   AddAttachments(message, Mail.Attachments);
+                
                   bool AreFilesCreated = SaveToFile(Mail);
                 if (AreFilesCreated)
                 {
